@@ -1,0 +1,18 @@
+service1:
+  name: service1
+  replicas: 1
+  imageName: ravasimages/node-hostname
+  imageTag: v1
+  runAsUser: 1000 
+  development: false 
+  cpuLimit: 500m
+  cpuRequest: 200m
+  minReplicas: 2
+  maxReplicas: 10
+  cpuThreshold: 50
+  internalLb: 
+    targetPort: 3000 
+    port: 3000
+  externalLb:
+    targetPort: 3000 
+    port: 80

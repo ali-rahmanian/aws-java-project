@@ -1,12 +1,9 @@
-FROM node:20 as build
+FROM node:18-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev
-#RUN npm install --only=production 
-
-FROM gcr.io/distroless/nodejs20-debian11
-COPY --from=build /app /app
-WORKDIR /app
-COPY . .
+RUN npm install --only=production 
+RUN chown node:node /app
+USER node
+COPY --chown=node:node  . .
 EXPOSE 3000
-CMD ["./bin/www"]
+CMD ["node", "./bin/www"]

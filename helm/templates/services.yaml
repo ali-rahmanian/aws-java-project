@@ -1,0 +1,4 @@
+{{- template "deployment" .Values.service1  -}}
+{{- template "internalService" .Values.service1  -}}
+{{- template "externalService" .Values.service1  -}}
+{{- template "hpa" .Values.service1  -}}
