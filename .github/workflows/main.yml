@@ -5,7 +5,7 @@ name: Build, test, and publish container image
     branches:
       - '*'
 env:
-  IMG-NAME: ravasimages/node-hostname:lastest
+  IMG-NAME: ravasimages/test-hostname:latest
   IMG-REGISTERY: hub.docker.com
 jobs:
   build:
