@@ -15,6 +15,27 @@ spec:
       labels:
         app: {{ .name }}-webapp
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ .name }}-webapp
+              topologyKey: topology.kubernetes.io/zone  
+          - weight: 50
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ .name }}-webapp
+              topologyKey: kubernetes.io/hostname  
       containers:
       - name: {{ .name }}-pod
         image: {{ .imageName | default "myService" }}:{{ .imageTag | default "1.0.0" }}{{ if .development }}-dev{{end}}
